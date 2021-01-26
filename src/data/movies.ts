@@ -21,4 +21,9 @@ export const MOVIES: IMovie[]  = [
     title: 'Pipper (court métrage)',
     duration: 15,
   },
+  {
+    id: 'seminaire',
+    title: 'Séminaire (très long)',
+    duration: 420,
+  },
 ];
