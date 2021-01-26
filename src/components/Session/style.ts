@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 
 export const InBlock = styled.div`
   height: 50px;
-  background-color: green;
+  background-color: orange;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@ export const InBlock = styled.div`
 
 export const OutBlock = styled.div`
   height: 30px;
-  background-color: maroon;
+  background-color: teal;
   color: #fff;
   display: flex;
   align-items: center;

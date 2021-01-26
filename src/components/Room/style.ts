@@ -19,3 +19,11 @@ export const Movies = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+
+interface IMaxProjectionTime {
+  error: boolean;
+}
+
+export const MaxProjectionTime = styled.div<IMaxProjectionTime>`
+  color: ${({ error }) => error ? 'green' : 'red' }
+`;
