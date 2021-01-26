@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Backdrop, CloseBtn, Modale } from './style';
+import { AddBtn, Backdrop, CloseBtn, Modale } from './style';
 import { MOVIES } from '../../data/movies';
 import { ISession } from "../../types/session";
 
@@ -40,7 +40,7 @@ const AddMovie = ({ onAddMovie }: IAddMovie) => {
           </Modale>
         </Backdrop>
       )}
-      <button type="button" onClick={() => openModal(true)}>+</button>
+      <AddBtn type="button" onClick={() => openModal(true)}>+</AddBtn>
     </>
   )
 };

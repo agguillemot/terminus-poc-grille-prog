@@ -59,7 +59,13 @@ function App() {
         </InputGroup>
       </Row>
       <Row>
-        <CinemaContextProvider inDuration={inValue} outDuration={outValue} totalOpeningTime={computeOpeningTime(openingTime, closingTime)}>
+        <CinemaContextProvider
+          inDuration={inValue}
+          outDuration={outValue}
+          openingTime={openingTime}
+          closingTime={closingTime}
+          totalOpeningTime={computeOpeningTime(openingTime, closingTime)}
+        >
           { ROOMS.map((room) => (
             <Room
               key={room.index}

@@ -8,6 +8,9 @@ const durationToHeight = (duration: number): number => duration * 2;
 
 export const Wrapper = styled.div`
   position: relative;
+  border: 1px solid grey;
+  border-right: none;
+  border-left: none;
 `;
 
 const commonProps = `
@@ -19,7 +22,7 @@ const commonProps = `
 
 export const InBlock = styled.div<DurationBlock>`
   height: ${({ duration }) => `${durationToHeight(duration)}px`};
-  background-color: orange;
+  background-color: aqua;
   ${commonProps}
 `;
 
@@ -40,4 +43,12 @@ export const DeleteBtn = styled.button`
   position: absolute;
   top: 0;
   right: 0;
+`;
+
+interface IWithError {
+  error: boolean;
+}
+
+export const Schedule = styled.div<IWithError>`
+  color: ${({ error }) => error ? 'red' : 'black'};
 `;

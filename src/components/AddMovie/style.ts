@@ -29,3 +29,10 @@ export const CloseBtn = styled.button`
   top: 0;
   right: 0;
 `;
+
+export const AddBtn = styled.button`
+  background-color: orange;
+  font-size: 2em;
+  color: #fff;
+  border: none;
+`;
