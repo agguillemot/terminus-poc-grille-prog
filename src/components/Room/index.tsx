@@ -7,6 +7,7 @@ import Session from "../Session";
 import { Movies, TechInfos, Wrapper, MaxProjectionTime } from './style';
 import { MOVIES } from '../../data/movies';
 import formatTime from "../utils/formatTime";
+import { sortSessionByStartTime } from '../utils/sortSession';
 
 interface IRoomComp {
   room: IRoom;
@@ -40,7 +41,11 @@ const Room = ({ room: { index, seats, screen, sound }, sessions, addSession, del
       </TechInfos>
       <Movies>
         <AddMovie onAddMovie={(session) => addSession(session)} />
-        { sessions.map((session, index) => <Session key={index} session={session} deleteSession={() => deleteSession(session)} />) }
+        {
+          sessions
+            .sort(sortSessionByStartTime)
+            .map((session, index) => <Session key={index} session={session} deleteSession={() => deleteSession(session)} />)
+        }
       </Movies>
     </Wrapper>
   );
