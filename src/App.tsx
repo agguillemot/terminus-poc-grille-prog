@@ -19,10 +19,21 @@ function App() {
     3: [],
   });
 
-  const addSessionToRoom = (roomIndex: number, newSession: ISession) => {
+  const addSession = (roomIndex: number, newSession: ISession) => {
     setSessions({
       ...sessions,
       [roomIndex]: [...sessions[roomIndex], newSession],
+    });
+  }
+
+  const deleteSession = (roomIndex: number, sessionToRemove: ISession) => {
+    const roomSessions = sessions[roomIndex];
+    const indexToRemove = roomSessions.findIndex((s) => s.movie === sessionToRemove.movie && s.startTime === sessionToRemove.startTime);
+    roomSessions.splice(indexToRemove, 1);
+    
+    setSessions({
+      ...sessions,
+      [roomIndex]: roomSessions,
     });
   }
 
@@ -32,11 +43,11 @@ function App() {
       <Row>
         <InputGroup>
           <label htmlFor="input-in">Première partie</label>
-          <input id="input-in" value={inValue} onChange={(e) => setIn(parseInt(e.currentTarget.value, 10))} />
+          <input id="input-in" type="number" min={0} value={inValue} onChange={(e) => setIn(parseInt(e.currentTarget.value, 10))} />
         </InputGroup>
         <InputGroup>
           <label htmlFor="input-out">Interséance</label>
-          <input id="input-out" value={outValue} onChange={(e) => setOut(parseInt(e.currentTarget.value, 10))} />
+          <input id="input-out" type="number" min={0} value={outValue} onChange={(e) => setOut(parseInt(e.currentTarget.value, 10))} />
         </InputGroup>
         <InputGroup>
           <label htmlFor="input-opening">heure d'ouverture</label>
@@ -54,7 +65,8 @@ function App() {
               key={room.index}
               room={room}
               sessions={sessions[room.index]}
-              addSession={(session) => addSessionToRoom(room.index, session)}
+              addSession={(session) => addSession(room.index, session)}
+              deleteSession={(session) => deleteSession(room.index, session)}
             />
           ))}
         </CinemaContextProvider>

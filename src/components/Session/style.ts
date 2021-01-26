@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: relative;
 `;
 
 export const InBlock = styled.div`
@@ -26,4 +27,10 @@ export const Movie = styled.div`
   align-items: center;
   justify-content: center;
   height: 150px;
+`;
+
+export const DeleteBtn = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;

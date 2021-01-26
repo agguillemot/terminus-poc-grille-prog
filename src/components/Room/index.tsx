@@ -6,14 +6,16 @@ import AddMovie from "../AddMovie";
 import Session from "../Session";
 import { Movies, TechInfos, Wrapper, MaxProjectionTime } from './style';
 import { MOVIES } from '../../data/movies';
+import formatTime from "../utils/formatTime";
 
 interface IRoomComp {
   room: IRoom;
   sessions: ISession[];
   addSession: (session: ISession) => void;
+  deleteSession: (session: ISession) => void;
 }
 
-const Room = ({ room: { index, seats, screen, sound }, sessions, addSession }: IRoomComp) => {
+const Room = ({ room: { index, seats, screen, sound }, sessions, addSession, deleteSession }: IRoomComp) => {
   const { totalOpeningTime, inDuration, outDuration } = useCinemaContext();
 
   const totalProjectionTime = sessions.reduce((total, session) => {
@@ -33,12 +35,12 @@ const Room = ({ room: { index, seats, screen, sound }, sessions, addSession }: I
         <div>son : {sound}</div>
       </TechInfos>
       <TechInfos>
-        <div>Temps maximal d'ouverture : {totalOpeningTime}</div>        
-        <MaxProjectionTime error={totalProjectionTime < totalOpeningTime}>Temps de projection : {totalProjectionTime}</MaxProjectionTime>        
+        <div>Temps maximal d'ouverture : {formatTime(totalOpeningTime)}</div>        
+        <MaxProjectionTime error={totalProjectionTime < totalOpeningTime}>Temps de projection : {formatTime(totalProjectionTime)}</MaxProjectionTime>        
       </TechInfos>
       <Movies>
-        { sessions.map((session, index) => <Session key={index} {...session} />) }
         <AddMovie onAddMovie={(session) => addSession(session)} />
+        { sessions.map((session, index) => <Session key={index} session={session} deleteSession={() => deleteSession(session)} />) }
       </Movies>
     </Wrapper>
   );
