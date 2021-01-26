@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Room from './components/Room';
+import { ROOMS } from './data/rooms';
+
+import { Row, Wrapper } from './App-style';
+import { ISession } from './types/session';
 
 function App() {
+  const [inValue, setIn] = useState<number>(15);
+  const [outValue, setOut] = useState<number>(5);
+
+  const [sessions, setSessions] = useState<Record<number, ISession[]>>({
+    1: [],
+    2: [],
+    3: [],
+  });
+
+  const addSessionToRoom = (roomIndex: number, newSession: ISession) => {
+    setSessions({
+      ...sessions,
+      [roomIndex]: [...sessions[roomIndex], newSession],
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <h1>Mercredi 12 novembre 2020 - semaine 32</h1>
+      <Row>
+        <label htmlFor="input-in">Durée de la première partie (min)</label>
+        <input id="input-in" value={inValue} onChange={(e) => setIn(parseInt(e.currentTarget.value, 10))} />
+      </Row>
+      <Row>
+        <label htmlFor="input-out">Durée de l'interséance (min)</label>
+        <input id="input-out" value={outValue} onChange={(e) => setOut(parseInt(e.currentTarget.value, 10))} />
+      </Row>
+      <Row>
+        { ROOMS.map((room) => (
+          <Room
+            key={room.index}
+            room={room}
+            sessions={sessions[room.index]}
+            addSession={(session) => addSessionToRoom(room.index, session)}
+          />
+        ))}
+      </Row>
+    </Wrapper>
   );
 }
 
