@@ -21,9 +21,7 @@ const Room = ({ room: { index, seats, screen, sound }, sessions, addSession }: I
         <div>son : {sound}</div>
       </TechInfos>
       <Movies>
-        {
-          sessions.map((session) => <Session {...session} />)
-        }
+        { sessions.map((session) => <Session key={session.movie} {...session} />) }
         <AddMovie onAddMovie={(session) => addSession(session)} />
       </Movies>
     </Wrapper>
