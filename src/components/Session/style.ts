@@ -1,32 +1,39 @@
 import styled from 'styled-components';
 
+interface DurationBlock {
+  duration: number;
+}
+
+const durationToHeight = (duration: number): number => duration * 2;
+
 export const Wrapper = styled.div`
   position: relative;
 `;
 
-export const InBlock = styled.div`
-  height: 50px;
-  background-color: orange;
+const commonProps = `
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 `;
 
-export const OutBlock = styled.div`
-  height: 30px;
+export const InBlock = styled.div<DurationBlock>`
+  height: ${({ duration }) => `${durationToHeight(duration)}px`};
+  background-color: orange;
+  ${commonProps}
+`;
+
+export const OutBlock = styled.div<DurationBlock>`
+  height: ${({ duration }) => `${durationToHeight(duration)}px`};
   background-color: teal;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${commonProps}
 `;
 
-export const Movie = styled.div`
-  display: flex;
+export const Movie = styled.div<DurationBlock>`
+  ${commonProps}
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
+  height: ${({ duration }) => `${durationToHeight(duration)}px`};
 `;
 
 export const DeleteBtn = styled.button`

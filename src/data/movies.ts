@@ -16,4 +16,9 @@ export const MOVIES: IMovie[]  = [
     title: 'Men In Black',
     duration: 92,
   },
+  {
+    id: 'court',
+    title: 'Pipper (court métrage)',
+    duration: 15,
+  },
 ];
