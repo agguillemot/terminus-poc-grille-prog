@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Backdrop, Modale } from './style';
+import React, { useEffect, useState } from "react";
+import { Backdrop, CloseBtn, Modale } from './style';
 import { MOVIES } from '../../data/movies';
 import { ISession } from "../../types/session";
 
@@ -14,6 +14,12 @@ const AddMovie = ({ onAddMovie }: IAddMovie) => {
 
   const formIsComplete = selectedMovie !== undefined && selectedTime !== undefined;
 
+  useEffect(() => {
+    // reset
+    selectMovie(undefined);
+    selectTime('10:00');
+  }, [isOpen]);
+
   const onSubmit = () => {
     openModal(false);
     if (formIsComplete) { onAddMovie({ movie: selectedMovie!, startTime: selectedTime! }); }
@@ -24,6 +30,7 @@ const AddMovie = ({ onAddMovie }: IAddMovie) => {
       { isOpen && (
         <Backdrop>
           <Modale>
+            <CloseBtn onClick={() => openModal(false)}>X</CloseBtn>
             <select onChange={(e) => selectMovie(e.currentTarget.value)}>
               <option value="">Choisir un film</option>
               { MOVIES.map((movie) => <option key={movie.id} value={movie.id}>{movie.title}</option>) }

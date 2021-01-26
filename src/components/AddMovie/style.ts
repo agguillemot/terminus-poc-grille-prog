@@ -10,12 +10,22 @@ export const Backdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 900;
 `;
 
 export const Modale = styled.div`
-  width: 400px;
-  height: 250px;
+  width: 300px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  z-index: 1000;
+  position: relative;
+  padding: 30px;
+  box-sizing: border-box;
+`;
+
+export const CloseBtn = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
